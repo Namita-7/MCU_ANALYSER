@@ -1,0 +1,71 @@
+{
+    "vendor": "Espressif",
+    "name": "ESP32 DevKit V1",
+    "mcu": "ESP32-WROOM-32",
+    "cpu_core": "Xtensa Dual-Core 32-bit LX6",
+    "flash_kb": 4096,
+    "ram_kb": 520,
+    "frequency_mhz": 240,
+    "sdk": {
+        "name": "ESP-IDF",
+        "version": "v5.0"
+    },
+    "board": {
+        "led": {
+            "builtin_pin": 2,
+            "Active_Level": "HIGH"
+        }
+    },
+    "OTHER_Pins": {
+        "Safer_gpio_pins": [
+            2,
+            4,
+            5,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            32,
+            33
+        ]
+    },
+    "UART": {
+        "TX": 1,
+        "RX": 3
+    },
+    "UART2": {
+        "TX": 17,
+        "RX": 16
+    },
+    "I2C": {
+        "SDA": 21,
+        "SCL": 22
+    },
+    "SPI": {
+        "MOSI": 23,
+        "MISO": 19,
+        "SCK": 18,
+        "CS": 5
+    },
+    "peripherals": {
+        "gpio": true,
+        "timer": true,
+        "uart": true,
+        "i2c": true,
+        "spi": true,
+        "adc": true,
+        "can": false,
+        "usb": false,
+        "ethernet": false
+    }
+}
