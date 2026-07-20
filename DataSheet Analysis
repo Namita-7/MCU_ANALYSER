@@ -1,0 +1,37 @@
+# Data Sheet Specification Simplified: ESP32-WROOM-32
+
+This document provides a simplified breakdown of the ESP32-WROOM-32 MCU architecture, memory, peripherals, and physical pin constraints for capability analysis.
+
+## Core Processor & Memory
+* The ESP32-D0WDQ6 features an Xtensa dual-core 32-bit LX6 microprocessor operating at up to 240MHz.
+* The standard memory architecture includes 448 KB ROM and 520 KB SRAM.
+* The Real-Time Clock (RTC) system contains 8KB of slow SRAM and 8KB of fast SRAM.
+
+## Power Management & RTC Co-Processor
+* The Ultra Low Power (ULP) Co-Processor remains active and functions during deep sleep.
+* The RTC fast memory can execute code immediately upon waking up from deep sleep.
+* Developers can preserve variables during sleep states using the `RTC_DATA_ATTR int boot_count = 0` attribute.
+* Custom wake-up functions can be defined in memory using `RTC_FAST_ATTR void custom_wake_up_routine(void)`.
+
+## GPIO & Pin Constraints
+* The module features a total of 34 GPIO pins, which includes 5 dedicated strapping GPIOs utilized during the boot sequence.
+* **Input-Only Pins:** GPIO 34, 35, 36 (SENSOR_VP), and 39 (SENSOR_VN) are Type I (Input-only) and physically cannot output digital signals.
+* **The Danger Zone:** GPIO 6 through 11 are physically wired to the internal SPI flash memory and will cause an immediate system crash if used for external board peripherals.
+
+## Communication Interfaces
+* **SPI:** Standard SPI uses GPIO 6 through 11 via the IO MUX.
+* **HSPI:** Routes through GPIO 12, GPIO 14, and GPIO 12 through GPIO 15 via the I/O MUX.
+* **VSPI:** Routes through GPIO 5, GPIO 18 through 19, and GPIO 21 through 23 via the I/O MUX.
+* **I2C:** Supports Standard Mode (100 Kbit/s) and Fast Mode (400 Kbit/s) up to 5MHz, constrained by SDA pull-up strength.
+* **I2C Addressing:** Features 7-bit and 10-bit addressing, dual address mode, and continuous data transmission with disabled Serial Clock (SCL).
+* **SD/SDIO/MMC:** Supports 2 external SD cards using the SD memory card standard on GPIO 2, GPIO 4, and GPIO 6 through GPIO 15.
+* **Ethernet:** Supports native 10 Mbps and 100 Mbps logic with a dedicated DMA controller, though it requires an external PHY component on standard dev boards.
+* **TWAI:** Compatible with ISO 11898-1, meaning it supports CAN specification 2.0.
+
+## Analog & Signal Control
+* **ADC:** Features two 12-bit SAR ADCs spanning across 18 channels.
+* **DAC:** Includes two 8-bit DAC channels.
+* **LED PWM:** Generates 16 independent PWM signals with a maximum duty cycle resolution of 20 bits using 8 independent timers and 20-bit counters.
+* **Motor Control:** Features dedicated Motor-control PWM capabilities.
+* **Remote Control:** Includes an IR remote control peripheral with 8 channels for transmission and reception of data.
+* **Pulse Counter:** Utilizes a dedicated PCNT (Pulse Counter Controller).
