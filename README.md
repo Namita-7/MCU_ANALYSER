@@ -4,11 +4,10 @@
 Based on the datasheet that I read through, I understood that there is more than just a physical board with gpio pins that communicate with the surroundings, for example Ethernet exsists in MCU level but its not supported by the board and needs external connection,gpio pins that take input only and all gpio can be used for multiple other application such as boot,strap,etc while some pins are confined only for spi communication and therefore there is alot of difference between MCU and a physical board.
 
 ## 2. Board-Level Analysis (DevKit V1 Pinout Diagram)
-The physical pin diagram consists only of 30pins for this board, 14 GPIO pins can be used to interface the led and other components when required,4pins for input only, 5 pins which include the ground and power,6 pins used with flash memory and cannot be used as regular GPIO pins and one enable pin.
+The physical pin diagram consists only of 30pins for this board, 21 GPIO pins can be used to interface the led and other components when required,4pins for input only, 4 pins which include the ground and power and one enable pin.
 
 ## 3. Capability Report (board_capabilities.json)
-[What the JSON contains, how it's structured, and how each field traces back
-to section 1 or 2 above. Maybe a short note: "run `analyze.py` to regenerate this."]
+There are two .json folders the first one contacting all the information about the board I am using in this assigment, the working gpio pins,uart pins, spi interface pins, I2C pins,adc pin and so on, this file also includes the various peripherals that exsit and those that aren't supported by this physical board, this is purely physical board based file and the next .json file consists of the exapmles like led blinking, spi protocol, so on which are mapped to the project references from the  official ESP-IDF path strings so we maintain a clean separation between our custom configuration and the core framework.
 
 ## 4. CLI Tool (analyze.py)
 [How to run it: `python analyze.py --board esp32-devkitv1 --sdk <path>`
