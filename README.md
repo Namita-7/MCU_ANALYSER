@@ -22,7 +22,18 @@ SPI Communication (examples/peripherals/spi_master/hd_eeprom): Communicate with 
 Timer (examples/peripherals/timer_group/gptimer): Set up a periodic hardware timer interrupt using the modern GPTimer API.
 
 ## 6. Validation Report
-[Link or embed your answer to the UART/ADC/Ethernet question, with classifications.]
+From the above files,datasheet,json codes we can validate this report
+#UART: Classified as "Supported" : The script verified that UART is marked true in the peripherals list and found an explicit UART block containing the board-level TX and RX pin mappings.
+#ADC: Classified as "Supported by MCU but not supported by the physical board":The ESP32 chip supports ADC and therefore marked true in the periperals, but because ADC channels share standard GPIO pins rather than having dedicated breakout pins on the DevKit V1, no separate ADC pin block was recorded in the JSON root. The script accurately detects this.
+#Ethernet: Classified as "Supported by MCU but not available on board (needs external PHY)" : While the ESP32 silicon contains a built-in Ethernet MAC, the DevKit V1 physical board lacks the required external PHY chip and RJ-45 jack. The script correctly identifies this hardware limitation via a targeted check.
 
 ## Setup & Run Instructions
-[Standard: clone, install deps if any, run command.]
+**1.Clone the repository:**
+git clone: [https://github.com/Namita-7/MCU_ANALYSER.git](https://github.com/Namita-7/MCU_ANALYSER.git)
+cd MCU_ANALYSER 
+**2.Dependencies:
+This tool uses Python's standard library (argparse and json). No external installations or virtual environments are required. Just ensure you have Python 3.x installed.
+**3.Run the Analyzer:
+The script requires command-line flags to specify the board and the SDK path. Run the following command in your terminal:
+python analyze.py --board esp32-devkitv1 --sdk ./esp-idf
+
