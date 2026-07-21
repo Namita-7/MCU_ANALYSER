@@ -10,8 +10,7 @@ The physical pin diagram consists only of 30pins for this board, 21 GPIO pins ca
 There are two .json folders the first one contacting all the information about the board I am using in this assigment, the working gpio pins,uart pins, spi interface pins, I2C pins,adc pin and so on, this file also includes the various peripherals that exsit and those that aren't supported by this physical board, this is purely physical board based file and the next .json file consists of the exapmles like led blinking, spi protocol, so on which are mapped to the project references from the  official ESP-IDF path strings so we maintain a clean separation between our custom configuration and the core framework.
 
 ## 4. CLI Tool (analyze.py)
-[How to run it: `python analyze.py --board esp32-devkitv1 --sdk <path>`
-What it outputs, how it pulls from your verified data rather than inventing anything.]
+In the analyse.py code, first the libraries argparse for reading command-line flags and json for reading the JSON files are imported. Then next we define a fuction which takes the feature (ex: uart) and the loaded json data.Special case for "ethernet" returns a fixed explanation immediately, as mentioned before ethernet on the board needs external connection.The next if checks two things, that is the peripherals say this feature is true and it does an upperkey (like UART) exsist with the actual data pin, if both are true then it returns supported, the third if is when the peripherals say this feature is true but is not in uppercase pin data then its mcu level only and the final return catches anything else as unkown.
 
 ## 5. SDK Example Recommendations
 [How examples were matched — point to the actual ESP-IDF example paths you verified,
