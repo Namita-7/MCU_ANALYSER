@@ -24,7 +24,5 @@
         "reason": "Set up a periodic timer interrupt"
     },
     "spi_comm": {
-        "path": "examples/peripherals/spi_master",
+        "path": "examples/peripherals/spi_master/hd_eeprom",
         "reason": "Communicate with SPI devices"
-    }
-}
