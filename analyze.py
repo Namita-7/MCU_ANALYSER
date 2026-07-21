@@ -9,7 +9,7 @@ def classify(feature, board_data):
         return "Supported"
     if board_data["peripherals"].get(feature):
         return "Supported by MCU (board-level pin data not recorded)"
-    return "Not enough verified information"
+    return "Unknown"
 
 
 def main():
