@@ -37,3 +37,5 @@ This tool uses Python's standard library (argparse and json). No external instal
 The script requires command-line flags to specify the board and the SDK path. Run the following command in your terminal:
 python analyze.py --board esp32-devkitv1 --sdk ./esp-idf
 
+## Ai Usage
+Made use of Claude tools for the the script flow, correction of indentations,brackets, refientment of the code making it simple for users understanding. Understanding various terms that were not known to me in the datasheet such as various use of hspi,vspi that I was not familiar with, to understand the difference between MCU and physical board on a deeper level making it easier to code the json files.Used Copilot for the refining the github repostories.
