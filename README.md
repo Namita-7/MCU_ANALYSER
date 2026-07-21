@@ -14,12 +14,12 @@ In the analyse.py code, first the libraries argparse for reading command-line fl
 
 ## 5. SDK Example Recommendations
 In the sdk_example.json file,the board's hardware capabilities are mapped directly to official ESP-IDF (v5.0) example project paths.
-LED Blink (`https://github.com/espressif/esp-idf/tree/v5.0/examples/get-started/blink`): Blink the onboard LED using standard GPIO logic.
-UART Communication (`https://github.com/espressif/esp-idf/tree/v5.0/examples/peripherals/uart/uart_echo`): Communicate with the board via UART by echoing serial data.
-ADC Read (`https://github.com/espressif/esp-idf/tree/v5.0/examples/peripherals/adc/oneshot_read`): Read analog values from ADC pins using the oneshot driver.
-I2C Communication (`https://github.com/espressif/esp-idf/tree/v5.0/examples/peripherals/i2c/i2c_simple`): Communicate with I2C devices using the master bus configuration.
-SPI Communication (`https://github.com/espressif/esp-idf/tree/v5.0/examples/peripherals/spi_master/hd_eeprom`): Communicate with external SPI devices (like an EEPROM).
-Timer (`https://github.com/espressif/esp-idf/tree/v5.0/examples/peripherals/timer_group/gptimer`): Set up a periodic hardware timer interrupt using the modern GPTimer API.
+* **LED Blink** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/get-started/blink/main/blink_example_main.c`): Blink the onboard LED using standard GPIO logic.
+* **UART Communication** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/peripherals/uart/uart_echo/main/uart_echo_example_main.c`): Communicate with the board via UART by echoing serial data.
+* **ADC Read** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/peripherals/adc/oneshot_read/main/oneshot_read_main.c`): Read analog values from ADC pins using the oneshot driver.
+* **I2C Communication** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/peripherals/i2c/i2c_simple/main/i2c_simple_main.c`): Communicate with I2C devices using the master bus configuration.
+* **SPI Communication** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/peripherals/spi_master/hd_eeprom/main/spi_eeprom_main.c`): Communicate with external SPI devices (like an EEPROM).
+* **Timer** (`https://github.com/espressif/esp-idf/blob/v5.0/examples/peripherals/timer_group/gptimer/main/gptimer_example_main.c`): Set up a periodic hardware timer interrupt using the modern GPTimer API.
 
 ## 6. Validation Report
 From the above files,datasheet,json codes we can validate this report
