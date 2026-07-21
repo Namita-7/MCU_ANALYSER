@@ -1,7 +1,7 @@
 {
   "sources": {
     "datasheet": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
-    "board_pinout": "Link to the DevKit V1 pinout you used"
+    "board_pinout": "https://randomnerdtutorials.com/esp32-pinout-reference-gpios/"
   },
   "vendor": "Espressif",
   "name": "ESP32 DevKit V1",
