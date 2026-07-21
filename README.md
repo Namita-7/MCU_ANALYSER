@@ -13,8 +13,13 @@ There are two .json folders the first one contacting all the information about t
 In the analyse.py code, first the libraries argparse for reading command-line flags and json for reading the JSON files are imported. Then next we define a fuction which takes the feature (ex: uart) and the loaded json data.Special case for "ethernet" returns a fixed explanation immediately, as mentioned before ethernet on the board needs external connection.The next if checks two things, that is the peripherals say this feature is true and it does an upperkey (like UART) exsist with the actual data pin, if both are true then it returns supported, the third if is when the peripherals say this feature is true but is not in uppercase pin data then its mcu level only and the final return catches anything else as unkown.
 
 ## 5. SDK Example Recommendations
-[How examples were matched — point to the actual ESP-IDF example paths you verified,
-with your one-line reasoning for each.]
+In the sdk_example.json file,the board's hardware capabilities are mapped directly to official ESP-IDF (v5.0) example project paths.
+LED Blink (examples/get-started/blink): Blink the onboard LED using standard GPIO logic.
+UART Communication (examples/peripherals/uart/uart_echo): Communicate with the board via UART by echoing serial data.
+ADC Read (examples/peripherals/adc/oneshot_read): Read analog values from ADC pins using the oneshot driver.
+I2C Communication (examples/peripherals/i2c/i2c_simple): Communicate with I2C devices using the master bus configuration.
+SPI Communication (examples/peripherals/spi_master/hd_eeprom): Communicate with external SPI devices (like an EEPROM).
+Timer (examples/peripherals/timer_group/gptimer): Set up a periodic hardware timer interrupt using the modern GPTimer API.
 
 ## 6. Validation Report
 [Link or embed your answer to the UART/ADC/Ethernet question, with classifications.]
