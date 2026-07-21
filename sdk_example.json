@@ -1,28 +1,30 @@
 {
-    "sdk": {
-        "name": "ESP-IDF",
-        "version": "v5.0"
-    },
-    "led_blink": {
-        "path": "examples/get-started/blink",
-        "reason": "Blink the onboard LED"
-    },
-    "uart_comm": {
-        "path": "examples/peripherals/uart/uart_echo",
-        "reason": "Communicate with the board via UART"
-    },
-    "adc_read": {
-        "path": "examples/peripherals/adc/oneshot_read",
-        "reason": "Read analog values from ADC pins"
-    },
-    "i2c_comm": {
-        "path": "examples/peripherals/i2c/i2c_simple",
-        "reason": "Communicate with I2C devices"
-    },
-    "timer_periodic": {
-        "path": "examples/peripherals/timer_group/gptimer",
-        "reason": "Set up a periodic timer interrupt"
-    },
-    "spi_comm": {
-        "path": "examples/peripherals/spi_master/hd_eeprom",
-        "reason": "Communicate with SPI devices"
+  "sdk": {
+    "name": "ESP-IDF",
+    "version": "v5.0"
+  },
+  "led_blink": {
+    "path": "examples/get-started/blink",
+    "reason": "Blink the onboard LED"
+  },
+  "uart_comm": {
+    "path": "examples/peripherals/uart/uart_echo",
+    "reason": "Communicate with the board via UART"
+  },
+  "adc_read": {
+    "path": "examples/peripherals/adc/oneshot_read",
+    "reason": "Read analog values from ADC pins"
+  },
+  "i2c_comm": {
+    "path": "examples/peripherals/i2c/i2c_simple",
+    "reason": "Communicate with I2C devices"
+  },
+  "timer_periodic": {
+    "path": "examples/peripherals/timer_group/gptimer",
+    "reason": "Set up a periodic timer interrupt"
+  },
+  "spi_comm": {
+    "path": "examples/peripherals/spi_master/hd_eeprom",
+    "reason": "Communicate with SPI devices"
+  }
+}
