@@ -1,14 +1,18 @@
 import argparse
 import json
 
-
 def classify(feature, board_data):
     if feature == "ethernet":
         return "Supported by MCU but not available on board (needs external PHY)"
-    if board_data["peripherals"].get(feature) and feature.upper() in board_data:
+    
+    # Check if peripherals list says true AND if an uppercase block exists (like UART)
+    if board_data.get("peripherals", {}).get(feature) and feature.upper() in board_data:
         return "Supported"
-    if board_data["peripherals"].get(feature):
+    
+    # Check if it's only in the peripherals list (MCU level only)
+    if board_data.get("peripherals", {}).get(feature):
         return "Supported by MCU (board-level pin data not recorded)"
+    
     return "Unknown"
 
 
@@ -18,10 +22,11 @@ def main():
     parser.add_argument("--sdk", required=True, help="Path to SDK repo")
     args = parser.parse_args()
 
+    # 1. FIXED: Exact filename matching for case-sensitive systems (Linux/GitHub)
     try:
-        with open("mcu.json") as f:
+        with open("MCU.json") as f:
             board_data = json.load(f)
-        with open("sdk_example.json") as f:
+        with open("sdk_examples.json") as f:
             sdk_examples = json.load(f)
     except FileNotFoundError as e:
         print(f"Error: Could not find configuration file - {e.filename}")
@@ -40,9 +45,20 @@ def main():
         print(f"- {req}: {info['path']}\n  reason: {info['reason']}")
 
     print(f"\n=== Validation Report ===")
+    validation_results = {}
     for feature in ["uart", "adc", "ethernet"]:
         result = classify(feature, board_data)
         print(f"- {feature}: {result}")
+        validation_results[feature] = result
+
+    # 2. FIXED: Automatically write the output files required by the assignment
+    with open("board_capabilities.json", "w") as f:
+        json.dump(board_data, f, indent=2)
+        print("\n[SUCCESS] Saved board_capabilities.json")
+        
+    with open("validation_report.json", "w") as f:
+        json.dump(validation_results, f, indent=2)
+        print("[SUCCESS] Saved validation_report.json")
 
 
 if __name__ == "__main__":
