@@ -1,4 +1,7 @@
 {
+  "sources": {
+    "esp_idf_repo": "https://github.com/espressif/esp-idf/tree/v5.0/examples"
+  },
   "sdk": {
     "name": "ESP-IDF",
     "version": "v5.0"
