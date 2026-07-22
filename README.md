@@ -46,8 +46,8 @@ Because the CLI tool dynamically loads these JSON files and parses the `--board`
 Example:`python analyze.py --board stm32-nucleo --sdk ./stm32cube`
 No changes to the `analyze.py` script are required to evaluate new hardware.
 
-## .9 Video Explanation Link
+## 9. Video Explanation Link
 Google Drive : `https://drive.google.com/drive/folders/1qVW8KxdPs3kpvTYVIMqCb9oO6mFbTtVu?usp=drive_link`
 
-## .10  Ai Usage
+## 10.  Ai Usage
 AI tools (Claude, GitHub Copilot) were used to assist with code structuring, debugging, and reducing code size making it more robust. All technical claims — MCU specifications, pin mappings, and SDK example paths — were independently verified against the official ESP32-WROOM-32 datasheet and the ESP-IDF GitHub repository.
