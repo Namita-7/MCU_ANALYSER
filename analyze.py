@@ -1,17 +1,34 @@
 import argparse
 import json
 
+
 def classify(feature, board_data):
-    if feature == "ethernet":
-        return "Supported by MCU but not available on board (needs external PHY)"
-    
-    if board_data.get("peripherals", {}).get(feature) and feature.upper() in board_data:
-        return "Supported"
-    
-    if board_data.get("peripherals", {}).get(feature):
+    peripherals = board_data["peripherals"]
+    value = peripherals.get(feature)
+
+    if value is None:
+        return "Not enough verified information"
+
+    if isinstance(value, dict):
+        if value.get("supported_by_board"):
+            return "Supported"
+        if value.get("requires_external_component"):
+            return f"Supported by MCU but not available on board — requires external component ({value.get('reason', '')})"
+        if value.get("supported_by_mcu"):
+            return "Supported by MCU but not available on board"
+        return "Unsupported" 
+        
+    if value is True:
+        pin_key = feature.upper()
+        if pin_key in board_data and isinstance(board_data[pin_key], dict):
+            return "Supported"
         return "Supported by MCU (board-level pin data not recorded)"
-    
-    return "Unknown"
+
+    if value is False:
+        return "Unsupported"
+
+    return "Not enough verified information"
+
 
 def main():
     parser = argparse.ArgumentParser(description="MCU Capability Analyzer")
@@ -41,19 +58,13 @@ def main():
         print(f"- {req}: {info['path']}\n  reason: {info['reason']}")
 
     print(f"\n=== Validation Report ===")
-    validation_results = {}
     for feature in ["uart", "adc", "ethernet"]:
-        result = classify(feature, board_data)
+        try:
+            result = classify(feature, board_data)
+        except KeyError as e:
+            result = f"Not enough verified information (missing key: {e})"
         print(f"- {feature}: {result}")
-        validation_results[feature] = result
 
-    with open("board_capabilities.json", "w") as f:
-        json.dump(board_data, f, indent=2)
-        print("\n[SUCCESS] Saved board_capabilities.json")
-        
-    with open("validation_report.json", "w") as f:
-        json.dump(validation_results, f, indent=2)
-        print("[SUCCESS] Saved validation_report.json")
 
 if __name__ == "__main__":
     main()
