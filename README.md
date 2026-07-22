@@ -38,4 +38,4 @@ The script requires command-line flags to specify the board and the SDK path. Ru
 python analyze.py --board esp32-devkitv1 --sdk ./esp-idf
 
 ## Ai Usage
-Made use of Claude tools for the the script flow, correction of indentations,brackets, refientment of the code making it simple for users understanding. Understanding various terms that were not known to me in the datasheet such as various use of hspi,vspi, to understand the difference between MCU and physical board on a deeper level making it easier to code the json files.Used Copilot for the refining the github repostories.Used VS code for the coding platform before adding it to GithHub, VS code helped in the code flow and suggestions, predictions of the code made it faster to debug and get to the final clear code.
+AI tools (Claude, GitHub Copilot) were used to assist with code structuring, debugging, and reducing code size making it more robust. All technical claims — MCU specifications, pin mappings, and SDK example paths — were independently verified against the official ESP32-WROOM-32 datasheet and the ESP-IDF GitHub repository.
