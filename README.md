@@ -27,7 +27,7 @@ From the above files,datasheet,json codes we can validate this report
 #ADC: Classified as "Supported by MCU, but board-level pin exposure not verified":The ESP32 chip supports ADC and therefore marked true in the periperals, but because ADC channels share standard GPIO pins rather than having dedicated breakout pins on the DevKit V1, no separate ADC pin block was recorded in the JSON root. The script accurately detects this.
 #Ethernet: Classified as "Supported by MCU but not available on board (needs external PHY)" : While the ESP32 silicon contains a built-in Ethernet MAC, the DevKit V1 physical board lacks the required external PHY chip and RJ-45 jack. The script correctly identifies this hardware limitation via a targeted check.
 
-## Setup & Run Instructions
+## 7. Setup & Run Instructions
 **1.Clone the repository:**
 git clone: [https://github.com/Namita-7/MCU_ANALYSER.git](https://github.com/Namita-7/MCU_ANALYSER.git)
 cd MCU_ANALYSER 
@@ -37,7 +37,7 @@ This tool uses Python's standard library (argparse and json). No external instal
 The script requires command-line flags to specify the board and the SDK path. Run the following command in your terminal:
 python analyze.py --board esp32-devkitv1 --sdk ./esp-idf
 
-## Extending to Other MCUs and Boards (Reusability)
+## 8. Extending to Other MCUs and Boards (Reusability)
 This tool was designed with a strictly data-driven architecture, meaning the core logic (`analyze.py`) is completely decoupled from the hardware specifications. It can be easily extended to analyze entirely different MCUs (such as an STM32, RP2040, or nRF52) or different board configurations without modifying the underlying Python code.
 To extend the tool for a new board, you only need to follow these two steps:
 *Update the Hardware Data : ** Replace the contents with the new MCU's datasheet specifications and the new physical board's pinout mappings. As long as the standardized keys (like `"peripherals"` and `"supported_by_mcu"`) are maintained, the `classify()` function will process it automatically.
@@ -46,8 +46,8 @@ Because the CLI tool dynamically loads these JSON files and parses the `--board`
 Example:`python analyze.py --board stm32-nucleo --sdk ./stm32cube`
 No changes to the `analyze.py` script are required to evaluate new hardware.
 
-##Video Explanation Link
+## .9 Video Explanation Link
 Google Drive : `https://drive.google.com/drive/folders/1qVW8KxdPs3kpvTYVIMqCb9oO6mFbTtVu?usp=drive_link`
 
-## Ai Usage
+## .10  Ai Usage
 AI tools (Claude, GitHub Copilot) were used to assist with code structuring, debugging, and reducing code size making it more robust. All technical claims — MCU specifications, pin mappings, and SDK example paths — were independently verified against the official ESP32-WROOM-32 datasheet and the ESP-IDF GitHub repository.
