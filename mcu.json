@@ -1,57 +1,64 @@
 {
-  "sources": {
-    "datasheet": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
-    "board_pinout": "https://randomnerdtutorials.com/esp32-pinout-reference-gpios/"
-  },
-  "vendor": "Espressif",
-  "name": "ESP32 DevKit V1",
-  "mcu": "ESP32-WROOM-32",
-  "cpu_core": "Xtensa Dual-Core 32-bit LX6",
-  "flash_kb": 4096,
-  "ram_kb": 520,
-  "frequency_mhz": 240,
-  "sdk": {
-    "name": "ESP-IDF",
-    "version": "v5.0"
-  },
-  "board": {
-    "led": {
-      "builtin_pin": 2,
-      "Active_Level": "HIGH"
+    "vendor": "Espressif",
+    "name": "ESP32 DevKit V1",
+    "mcu": "ESP32-WROOM-32",
+    "cpu_core": "Xtensa Dual-Core 32-bit LX6",
+    "flash_kb": 4096,
+    "ram_kb": 520,
+    "frequency_mhz": 240,
+    "mcu_sources": "ESP32-WROOM-32 Datasheet, Section 1.1 Features (Espressif official docs)",
+
+    "sdk": {
+        "name": "ESP-IDF",
+        "version": "v5.0"
+    },
+
+    "board": {
+        "led": {
+            "builtin_pin": 2,
+            "active_level": "HIGH",
+            "source": "Verified against DevKit V1 pinout diagram + RandomNerdTutorials ESP32 pinout reference"
+        }
+    },
+
+    "gpio_pins": {
+        "usable_gpio": [2, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33],
+        "input_only": [34, 35, 36, 39],
+        "source": "Counted directly from physical DevKit V1 board ; cross-checked with RandomNerdTutorials ESP32 pinout reference"
+    },
+
+    "UART": {
+        "TX": 1, "RX": 3,
+        "source": "ESP32-WROOM-32 Datasheet, default UART0 pin assignment"
+    },
+    "UART2": {
+        "TX": 17, "RX": 16,
+        "source": "ESP32-WROOM-32 Datasheet, default UART2 pin assignment"
+    },
+    "I2C": {
+        "SDA": 21, "SCL": 22,
+        "source": "ESP32 default I2C pin assignment (Arduino/ESP-IDF convention)"
+    },
+    "SPI": {
+        "MOSI": 23, "MISO": 19, "SCK": 18, "CS": 5,
+        "source": "ESP32 default VSPI pin assignment, ESP32-WROOM-32 Datasheet"
+    },
+
+    "peripherals": {
+        "gpio": true,
+        "timer": true,
+        "uart": true,
+        "i2c": true,
+        "spi": true,
+        "adc": true,
+        "can": false,
+        "usb": false,
+        "ethernet": {
+            "supported_by_mcu": true,
+            "supported_by_board": false,
+            "requires_external_component": true,
+            "reason": "ESP32 has an integrated EMAC (Ethernet MAC), but requires an external PHY chip and RJ45 connector, neither present on DevKit V1",
+            "source": "ESP32-WROOM-32 Datasheet, Ethernet MAC Interface section"
+        }
     }
-  },
-  "OTHER_Pins": {
-    "Safer_gpio_pins": [
-      2, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33
-    ]
-  },
-  "UART": {
-    "TX": 1,
-    "RX": 3
-  },
-  "UART2": {
-    "TX": 17,
-    "RX": 16
-  },
-  "I2C": {
-    "SDA": 21,
-    "SCL": 22
-  },
-  "SPI": {
-    "MOSI": 23,
-    "MISO": 19,
-    "SCK": 18,
-    "CS": 5
-  },
-  "peripherals": {
-    "gpio": true,
-    "timer": true,
-    "uart": true,
-    "i2c": true,
-    "spi": true,
-    "adc": true,
-    "can": false,
-    "usb": false,
-    "ethernet": false
-  }
 }
