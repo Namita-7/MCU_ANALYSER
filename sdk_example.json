@@ -1,72 +1,30 @@
-import argparse
-import json
-
-
-def classify(feature, board_data):
-    peripherals = board_data["peripherals"]
-    value = peripherals.get(feature)
-
-    if value is None:
-        return "Unknown"
-
-    # Handle object-style entries (like ethernet)
-    if isinstance(value, dict):
-        if value.get("supported_by_board"):
-            return "Supported"
-        if value.get("requires_external_component"):
-            return f"Supported by MCU but not available on board — requires external component ({value.get('reason', '')})"
-        if value.get("supported_by_mcu"):
-            return "Supported by MCU but not available on board"
-        return "Unsupported"
-
-    # Handle simple true/false entries (uart, adc, etc.)
-    if value is True:
-        pin_key = feature.upper()
-        if pin_key in board_data and isinstance(board_data[pin_key], dict):
-            return "Supported"
-        return "Supported by MCU (board-level pin data not recorded)"
-
-    if value is False:
-        return "Unsupported"
-
-    return "Not enough verified information"
-
-
-def main():
-    parser = argparse.ArgumentParser(description="MCU Capability Analyzer")
-    parser.add_argument("--board", required=True, help="Board name")
-    parser.add_argument("--sdk", required=True, help="Path to SDK repo")
-    args = parser.parse_args()
-
-    try:
-        with open("mcu.json") as f:
-            board_data = json.load(f)
-        with open("sdk_example.json") as f:
-            sdk_examples = json.load(f)
-    except FileNotFoundError as e:
-        print(f"Error: Could not find configuration file - {e.filename}")
-        return
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON syntax - {e}")
-        return
-
-    print(f"\n=== MCU Capability Report: {args.board} ===")
-    print(json.dumps(board_data, indent=2))
-
-    print(f"\n=== SDK Example Recommendations (SDK: {args.sdk}) ===")
-    for req, info in sdk_examples.items():
-        if req == "sdk":
-            continue
-        print(f"- {req}: {info['path']}\n  reason: {info['reason']}")
-
-    print(f"\n=== Validation Report ===")
-    for feature in ["uart", "adc", "ethernet"]:
-        try:
-            result = classify(feature, board_data)
-        except KeyError as e:
-            result = f"Not enough verified information (missing key: {e})"
-        print(f"- {feature}: {result}")
-
-
-if __name__ == "__main__":
-    main()
+{
+    "sdk": {
+        "name": "ESP-IDF",
+        "version": "v5.0"
+    },
+    "led_blink": {
+        "path": "examples/get-started/blink",
+        "reason": "Blink the onboard LED"
+    },
+    "uart_comm": {
+        "path": "examples/peripherals/uart/uart_echo",
+        "reason": "Communicate with the board via UART"
+    },
+    "adc_read": {
+        "path": "examples/peripherals/adc/oneshot_read",
+        "reason": "Read analog values from ADC pins"
+    },
+    "i2c_comm": {
+        "path": "examples/peripherals/i2c/i2c_simple",
+        "reason": "Communicate with I2C devices"
+    },
+    "timer_periodic": {
+        "path": "examples/peripherals/timer_group/gptimer",
+        "reason": "Set up a periodic timer interrupt"
+    },
+    "spi_comm": {
+        "path": "examples/peripherals/spi_master/hd_eeprom",
+        "reason": "Communicate with SPI devices"
+    }
+}
