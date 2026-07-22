@@ -41,10 +41,13 @@ python analyze.py --board esp32-devkitv1 --sdk ./esp-idf
 This tool was designed with a strictly data-driven architecture, meaning the core logic (`analyze.py`) is completely decoupled from the hardware specifications. It can be easily extended to analyze entirely different MCUs (such as an STM32, RP2040, or nRF52) or different board configurations without modifying the underlying Python code.
 To extend the tool for a new board, you only need to follow these two steps:
 *Update the Hardware Data : ** Replace the contents with the new MCU's datasheet specifications and the new physical board's pinout mappings. As long as the standardized keys (like `"peripherals"` and `"supported_by_mcu"`) are maintained, the `classify()` function will process it automatically.
-***Update the SDK Mappings (`sdk_example.json`):** Swap the ESP-IDF example paths with the relevant SDK paths for the new architecture (e.g., STM32Cube HAL examples or Pico SDK paths).
+*Update the SDK Mappings (`sdk_example.json`):** Swap the ESP-IDF example paths with the relevant SDK paths for the new architecture (e.g., STM32Cube HAL examples or Pico SDK paths).
 Because the CLI tool dynamically loads these JSON files and parses the `--board` and `--sdk` arguments at runtime, it makes it very easy at the time of excecution.
 Example:`python analyze.py --board stm32-nucleo --sdk ./stm32cube`
 No changes to the `analyze.py` script are required to evaluate new hardware.
+
+**Video Explanation Link
+Google Drive : `https://drive.google.com/drive/folders/1qVW8KxdPs3kpvTYVIMqCb9oO6mFbTtVu?usp=drive_link`
 
 ## Ai Usage
 AI tools (Claude, GitHub Copilot) were used to assist with code structuring, debugging, and reducing code size making it more robust. All technical claims — MCU specifications, pin mappings, and SDK example paths — were independently verified against the official ESP32-WROOM-32 datasheet and the ESP-IDF GitHub repository.
